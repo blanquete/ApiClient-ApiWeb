@@ -18,6 +18,32 @@ namespace TodoList.TascaApi
             BaseUri = ConfigurationManager.AppSettings["BaseUri"];
         }
 
+
+        public async Task<Responsable> GetResponsble()
+        {
+            Responsable responsable = new Responsable();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("responsables");
+                if (response.IsSuccessStatusCode)
+                {
+                    //Obtenim el resultat i el carreguem al objecte llista de tasques
+                    responsable = await response.Content.ReadAsAsync<Responsable>();
+                    response.Dispose();
+                }
+                else
+                {
+                    //TODO: que fer si ha anat malament? retornar null? missatge?
+                }
+            }
+            return responsable;
+        }
+
         public async Task<int> maxId()
         {
             List<Tasca> tasques = await GetTasquesAsync();
@@ -119,6 +145,7 @@ namespace TodoList.TascaApi
             }
             return tasques;
         }
+
 
         /// <summary>
         /// Afegeix una nova tasca

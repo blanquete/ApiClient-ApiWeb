@@ -152,7 +152,7 @@ namespace TodoList
             }
         }
 
-        public void obrirModificar()
+        public  void obrirModificar()
         {
             at = new AddTask(this);
             if (at.IsEnabled)

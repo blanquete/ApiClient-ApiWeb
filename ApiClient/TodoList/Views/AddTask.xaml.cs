@@ -15,20 +15,30 @@ namespace TodoList.Views
     {
         public Tasca temp;
         public MainWindow w1;
-        public TascaApiClient apliClient;
-        public AddTask(MainWindow main)
+        public TascaApiClient apiClient;
+        public  AddTask(MainWindow main)
         {
             InitializeComponent();
             w1 = main;
+            apiClient = new TascaApiClient();
+
+            mostrarResponsables();
+
+        }
+
+
+        public async void mostrarResponsables()
+        {
+            await apiClient.GetResponsble();
         }
         //Funcio, per poder afegir una tasca
         private async void btn_agregar_Click(object sender, RoutedEventArgs e)
         {
-
+            
             //afageix un nou item al listview
             temp = new Tasca()
             {
-                _Id = await apliClient.maxId()+1,
+                _Id = await apiClient.maxId()+1,
                 Nom = txt_nomTasca.Text,
                 Descripcio = txt_descripcio.Text,
                 DInici = DateTime.Now,
@@ -48,7 +58,7 @@ namespace TodoList.Views
             w1.lvTascaToDo.ItemsSource = null;
             w1.lvTascaToDo.ItemsSource = w1.todo;
 
-            await apliClient.AddAsync(temp);
+            await apiClient.AddAsync(temp);
             netejaCamps();
         }
 
@@ -95,7 +105,7 @@ namespace TodoList.Views
                     w1.lvTascaDone.ItemsSource = w1.done;
                 }
 
-                await apliClient.UpdateAsync(temp);
+                await apiClient.UpdateAsync(temp);
 
                 netejaCamps();
 
