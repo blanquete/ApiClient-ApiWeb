@@ -26,17 +26,12 @@ namespace TodoList.Views
             apiClient = new TascaApiClient();
 
             //prioritats = mostrarResponsables();
-            //responsables = await apiClient.GetResponsable();
-            
 
            /* foreach (Prioritat prio in prioritats)
             {
                 cmb_prioritat.Items.Add(prio.Nom);
             }*/
-            /*foreach (Responsable resp in responsables)
-            {
-                cmb_responsable.Items.Add(resp.Nom);
-            }*/
+            
 
         }
 
@@ -142,6 +137,15 @@ namespace TodoList.Views
             txt_estat.Text = "";
             datepicker_data_inici.SelectedDate = null;
             txt_nomTasca.Focus();
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            responsables = await apiClient.GetResponsable();
+            foreach (Responsable resp in responsables)
+            {
+                cmb_responsable.Items.Add(resp.Nom);
+            }
         }
     }
 }
