@@ -34,6 +34,7 @@ namespace TodoList.Views
                 //UserService.afegirResponsable(responsable);
                 await api.AfegirResponsable(responsable);
                 MessageBox.Show("Has introduït un usuari", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
             }
             else
             {

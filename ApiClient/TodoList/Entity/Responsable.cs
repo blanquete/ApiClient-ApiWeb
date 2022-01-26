@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,31 +9,13 @@ namespace TodoList.Entity
     public class Responsable
     {
 
-        //Declaració de variables
-        private int id;
-        private string nom;
+        [BsonId]
+        public ObjectId Id { get; set; }
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-        public string Nom
-        {
-            get { return nom; }
-            set { nom = value; }
-        }
+        [BsonElement("id")]
+        public int _Id { get; set; }
 
-        //Constructor 
-        public Responsable()
-        {
-            id = 0;
-            nom = "";
-        }
-        public Responsable(int id_, string nom_)
-        {
-            id = id_;
-            nom = nom_;
-        }
+        [BsonElement("nom")]
+        public string Nom { get; set; }
     }
 }

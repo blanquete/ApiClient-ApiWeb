@@ -64,7 +64,7 @@ namespace TodoList
         {
             at = new AddTask(this);
             at.btn_modificar.Visibility = Visibility.Hidden;
-            at.Show();
+            at.ShowDialog();
         }
 
         private void lvTascaToDo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -193,7 +193,7 @@ namespace TodoList
         private void btn_AfegirResponsalbe_Click(object sender, RoutedEventArgs e)
         {
             AddManager afegirResponsable = new AddManager();
-            afegirResponsable.Show();
+            afegirResponsable.ShowDialog();
         }
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

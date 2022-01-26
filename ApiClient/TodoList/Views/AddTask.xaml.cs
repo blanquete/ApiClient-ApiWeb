@@ -16,20 +16,33 @@ namespace TodoList.Views
         public Tasca temp;
         public MainWindow w1;
         public TascaApiClient apiClient;
+        public List<Prioritat> prioritats;
+        public List<Responsable> responsables;
+
         public  AddTask(MainWindow main)
         {
             InitializeComponent();
             w1 = main;
             apiClient = new TascaApiClient();
 
-            mostrarResponsables();
+            //prioritats = mostrarResponsables();
+            //responsables = await apiClient.GetResponsable();
+            
+
+           /* foreach (Prioritat prio in prioritats)
+            {
+                cmb_prioritat.Items.Add(prio.Nom);
+            }*/
+            /*foreach (Responsable resp in responsables)
+            {
+                cmb_responsable.Items.Add(resp.Nom);
+            }*/
 
         }
 
-
         public async void mostrarResponsables()
         {
-            await apiClient.GetResponsble();
+            await apiClient.GetResponsable();
         }
         //Funcio, per poder afegir una tasca
         private async void btn_agregar_Click(object sender, RoutedEventArgs e)

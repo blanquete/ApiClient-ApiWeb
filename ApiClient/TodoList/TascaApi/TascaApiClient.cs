@@ -19,9 +19,9 @@ namespace TodoList.TascaApi
         }
 
 
-        public async Task<Responsable> GetResponsble()
+        public async Task<List<Responsable>> GetResponsable()
         {
-            Responsable responsable = new Responsable();
+            List<Responsable> responsables = new List<Responsable>();
 
             using (var client = new HttpClient())
             {
@@ -29,11 +29,12 @@ namespace TodoList.TascaApi
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                //Enviem una petició GET al endpoint /tasca}
                 HttpResponseMessage response = await client.GetAsync("responsables");
                 if (response.IsSuccessStatusCode)
                 {
                     //Obtenim el resultat i el carreguem al objecte llista de tasques
-                    responsable = await response.Content.ReadAsAsync<Responsable>();
+                    responsables = await response.Content.ReadAsAsync<List<Responsable>>();
                     response.Dispose();
                 }
                 else
@@ -41,7 +42,7 @@ namespace TodoList.TascaApi
                     //TODO: que fer si ha anat malament? retornar null? missatge?
                 }
             }
-            return responsable;
+            return responsables;
         }
 
         public async Task<int> maxId()
@@ -60,6 +61,9 @@ namespace TodoList.TascaApi
             }
         }
 
+
+        //Añadir un responsable.
+
         public async Task AfegirResponsable(Responsable responsable)
         {
 
@@ -68,8 +72,7 @@ namespace TodoList.TascaApi
                 client.BaseAddress = new Uri(BaseUri);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Enviem una petició POST al endpoint /users}
+    
                 HttpResponseMessage response = await client.PostAsJsonAsync("responsables", responsable);
                 response.EnsureSuccessStatusCode();
             }
