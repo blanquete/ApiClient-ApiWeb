@@ -18,6 +18,31 @@ namespace TodoList.TascaApi
             BaseUri = ConfigurationManager.AppSettings["BaseUri"];
         }
 
+        public async Task<List<Prioritat>> GetPrioritats()
+        {
+            List<Prioritat> prioritats = new List<Prioritat>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició GET al endpoint /tasca}
+                HttpResponseMessage response = await client.GetAsync("prioritats");
+                if (response.IsSuccessStatusCode)
+                {
+                    //Obtenim el resultat i el carreguem al objecte llista de tasques
+                    prioritats = await response.Content.ReadAsAsync<List<Prioritat>>();
+                    response.Dispose();
+                }
+                else
+                {
+                    //TODO: que fer si ha anat malament? retornar null? missatge?
+                }
+            }
+            return prioritats;
+        }
 
         public async Task<List<Responsable>> GetResponsable()
         {

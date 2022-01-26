@@ -25,12 +25,7 @@ namespace TodoList.Views
             w1 = main;
             apiClient = new TascaApiClient();
 
-            //prioritats = mostrarResponsables();
-
-           /* foreach (Prioritat prio in prioritats)
-            {
-                cmb_prioritat.Items.Add(prio.Nom);
-            }*/
+           
             
 
         }
@@ -146,6 +141,12 @@ namespace TodoList.Views
             {
                 cmb_responsable.Items.Add(resp.Nom);
             }
+            prioritats = await apiClient.GetPrioritats();
+
+             foreach (Prioritat prio in prioritats)
+             {
+                 cmb_prioritat.Items.Add(prio.Nom);
+             }
         }
     }
 }
