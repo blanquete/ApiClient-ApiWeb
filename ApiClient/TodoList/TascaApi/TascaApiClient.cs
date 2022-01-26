@@ -110,7 +110,7 @@ namespace TodoList.TascaApi
         /// <param name="Tasca">Codi de Tasca</param>
         /// <returns>Tasca o null si no el troba</returns>
         //Funció per poder fer un select de totes les nostres tasques.
-        public async Task<Tasca> GetTascaAsync(int Id)
+        public async Task<Tasca> GetTascaAsync(int estat)
         {
             Tasca tasca = new Tasca();
 
@@ -121,7 +121,7 @@ namespace TodoList.TascaApi
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició GET al endpoint /tasca/{Id}
-                HttpResponseMessage response = await client.GetAsync($"tasques/{Id}");
+                HttpResponseMessage response = await client.GetAsync($"tasques/{estat}");
                 if (response.IsSuccessStatusCode)
                 {
                     //Reposta 204 quan no ha trobat dades
@@ -159,7 +159,32 @@ namespace TodoList.TascaApi
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició GET al endpoint /tasca}
-                HttpResponseMessage response = await client.GetAsync("tasques");
+                HttpResponseMessage response = await client.GetAsync("tasques/1");
+                if (response.IsSuccessStatusCode)
+                {
+                    //Obtenim el resultat i el carreguem al objecte llista de tasques
+                    tasques = await response.Content.ReadAsAsync<List<Tasca>>();
+                    response.Dispose();
+                }
+                else
+                {
+                    //TODO: que fer si ha anat malament? retornar null? missatge?
+                }
+            }
+            return tasques;
+        }
+        public async Task<List<Tasca>> GetTasquesToDo()
+        {
+            List<Tasca> tasques = new List<Tasca>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició GET al endpoint /tasca}
+                HttpResponseMessage response = await client.GetAsync("tasques/1");
                 if (response.IsSuccessStatusCode)
                 {
                     //Obtenim el resultat i el carreguem al objecte llista de tasques
@@ -174,6 +199,56 @@ namespace TodoList.TascaApi
             return tasques;
         }
 
+        public async Task<List<Tasca>> GetTasquesDoing()
+        {
+            List<Tasca> tasques = new List<Tasca>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició GET al endpoint /tasca}
+                HttpResponseMessage response = await client.GetAsync("tasques/2");
+                if (response.IsSuccessStatusCode)
+                {
+                    //Obtenim el resultat i el carreguem al objecte llista de tasques
+                    tasques = await response.Content.ReadAsAsync<List<Tasca>>();
+                    response.Dispose();
+                }
+                else
+                {
+                    //TODO: que fer si ha anat malament? retornar null? missatge?
+                }
+            }
+            return tasques;
+        }
+        public async Task<List<Tasca>> GetTasquesDone()
+        {
+            List<Tasca> tasques = new List<Tasca>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició GET al endpoint /tasca}
+                HttpResponseMessage response = await client.GetAsync("tasques/3");
+                if (response.IsSuccessStatusCode)
+                {
+                    //Obtenim el resultat i el carreguem al objecte llista de tasques
+                    tasques = await response.Content.ReadAsAsync<List<Tasca>>();
+                    response.Dispose();
+                }
+                else
+                {
+                    //TODO: que fer si ha anat malament? retornar null? missatge?
+                }
+            }
+            return tasques;
+        }
 
         /// <summary>
         /// Afegeix una nova tasca

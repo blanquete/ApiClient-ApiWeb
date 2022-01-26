@@ -48,9 +48,14 @@ namespace TodoList.Entity
 
             [BsonElement("responsable_id")]
             public int Responsable_id { get; set; }
-            //public string Estat_name { get; set; }
 
+        public static implicit operator List<object>(Tasca v)
+        {
+            throw new NotImplementedException();
         }
+        //public string Estat_name { get; set; }
+
+    }
 
         //public int Id
         //{

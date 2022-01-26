@@ -24,10 +24,6 @@ namespace TodoList.Views
             InitializeComponent();
             w1 = main;
             apiClient = new TascaApiClient();
-
-           
-            
-
         }
 
         public async void mostrarResponsables()

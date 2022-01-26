@@ -46,14 +46,13 @@ namespace TodoList
         }
         public async void mostrarTodo()
         {
-            lvTascaToDo.ItemsSource = await api.GetTasquesAsync();
-            lvTascaDoing.ItemsSource = await api.GetTasquesAsync();
-            lvTascaDone.ItemsSource = await api.GetTasquesAsync();
+            lvTascaToDo.ItemsSource = await api.GetTasquesToDo();
+            lvTascaDoing.ItemsSource = await api.GetTasquesDoing();
+            lvTascaDone.ItemsSource = await api.GetTasquesDone();
         }
 
         /*public void SeleccionarTodo()
         {
-
             //Agafa el items que te cada llista
             lvTascaToDo.ItemsSource = todo = UserService.Select(1);
             lvTascaDoing.ItemsSource = doing = UserService.Select(2);
