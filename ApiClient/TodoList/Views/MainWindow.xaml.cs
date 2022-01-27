@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TodoList.Views;
 using TodoList.Entity;
 using TodoList.TascaApi;
-using static TodoList.Entity.Tasca;
 
 namespace TodoList
 {
@@ -42,22 +32,19 @@ namespace TodoList
         {
             InitializeComponent();
 
-            mostrarTodo();
+            updateListViews();
         }
-        public async void mostrarTodo()
+        public async void updateListViews()
         {
-            lvTascaToDo.ItemsSource = await api.GetTasquesToDo();
-            lvTascaDoing.ItemsSource = await api.GetTasquesDoing();
-            lvTascaDone.ItemsSource = await api.GetTasquesDone();
-        }
+            lvTascaToDo.ItemsSource = null;
+            lvTascaDoing.ItemsSource = null;
+            lvTascaDone.ItemsSource = null;
 
-        /*public void SeleccionarTodo()
-        {
-            //Agafa el items que te cada llista
-            lvTascaToDo.ItemsSource = todo = UserService.Select(1);
-            lvTascaDoing.ItemsSource = doing = UserService.Select(2);
-            lvTascaDone.ItemsSource = done = UserService.Select(3);
-        }*/
+
+            lvTascaToDo.ItemsSource = todo = await api.GetTasquesToDo();
+            lvTascaDoing.ItemsSource = doing = await api.GetTasquesDoing();
+            lvTascaDone.ItemsSource = done = await api.GetTasquesDone();
+        }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -194,6 +181,9 @@ namespace TodoList
             AddManager afegirResponsable = new AddManager();
             afegirResponsable.ShowDialog();
         }
+
+
+
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //Obtenim la llista des d'on s'ha polsat 
@@ -245,24 +235,26 @@ namespace TodoList
             switch (parent.Name)
             {
                 case "lvTascaToDo":
-                    task.estat =  Estat.Todo;
+                    task.estat = Tasca.Estat.Todo;
                     task.Estat_name = "To Do";
                     await api.UpdateAsync(task);
                     break;
                 case "lvTascaDoing":
-                    task.estat = Estat.Doing;
+                    task.estat = Tasca.Estat.Doing;
                     task.Estat_name = "Doing";
                     await api.UpdateAsync(task);
                     break;
                 case "lvTascaDone":
-                    task.estat = Estat.Done;
+                    task.estat = Tasca.Estat.Done;
                     task.Estat_name = "Done";
                     await api.UpdateAsync(task);
                     break;
             }
             //Actualitza els listviews
-            //SeleccionarTodo();
+            updateListViews();
         }
+
+        
     }
 }
 
