@@ -115,9 +115,9 @@ namespace ToDoListApiRest.DAL.Service
         }
 
         /// <summary>
-        /// Actualitza un usuari
+        /// Actualitza una tasca
         /// </summary>
-        /// <param name="tasca">Entitat usuari que es vol modificar</param>
+        /// <param name="tasca">Entitat tasca que es vol modificar</param>
 
 
 
@@ -129,10 +129,6 @@ namespace ToDoListApiRest.DAL.Service
             var result = tasques.ReplaceOne(filtre, tasca);
         }
 
-        /// <summary>
-        /// Elimina un usuari
-        /// </summary>
-        /// <param name="Id">Codi d'usuari que es vol eliminar</param>
         public int maxId()
         {
             List<Tasca> tasques = GetAll();
