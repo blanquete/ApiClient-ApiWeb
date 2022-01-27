@@ -37,7 +37,7 @@ namespace ToDoListApiRest.DAL.Service
             return tasques;
         }
 
-        public Tasca Select(ObjectId id)//*/(int id)
+        public Tasca Select(string id)//*/(int id)
         {
             List<Tasca> tasques = GetAll();
 
@@ -62,7 +62,7 @@ namespace ToDoListApiRest.DAL.Service
         {
             IMongoCollection<Tasca> tasques = DbContext.GetTasques();
 
-            var filtre = Builders<Tasca>.Filter.Eq(s => s.Id, tasca.Id);
+            var filtre = Builders<Tasca>.Filter.Eq(s => s._Id, tasca._Id);
             var result = tasques.ReplaceOne(filtre, tasca);
         }
 
@@ -115,9 +115,9 @@ namespace ToDoListApiRest.DAL.Service
         }
 
         /// <summary>
-        /// Actualitza un usuari
+        /// Actualitza una tasca
         /// </summary>
-        /// <param name="tasca">Entitat usuari que es vol modificar</param>
+        /// <param name="tasca">Entitat tasca que es vol modificar</param>
 
 
 
@@ -129,10 +129,6 @@ namespace ToDoListApiRest.DAL.Service
             var result = tasques.ReplaceOne(filtre, tasca);
         }
 
-        /// <summary>
-        /// Elimina un usuari
-        /// </summary>
-        /// <param name="Id">Codi d'usuari que es vol eliminar</param>
         public int maxId()
         {
             List<Tasca> tasques = GetAll();

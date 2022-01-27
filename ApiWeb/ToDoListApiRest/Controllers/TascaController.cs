@@ -15,7 +15,7 @@ namespace ToDoListApiRest.Controllers
     [ApiController]
     public class TascaController : ControllerBase
     {
-        // GET: users
+        // GET: tasques
         [HttpGet]
         public List<Tasca> Get()
         {
@@ -23,7 +23,7 @@ namespace ToDoListApiRest.Controllers
             return objUserService.GetAll();//Aqui hem de passar un array o algo que contingui les 3 llistes de tasques
         }
 
-        // GET users/5
+        // GET tasques/2
         [HttpGet("{estat}")]
         public List<Tasca> Get(int estat)
         {
@@ -31,15 +31,7 @@ namespace ToDoListApiRest.Controllers
             return objUserService.Select(estat);
         }
 
-        /*// GET users/5
-        [HttpGet("{id}")]
-        public List<Tasca> Get(ObjectId Id)
-        {
-            UserService objUserService = new UserService();
-            return objUserService.Select(Id);
-        }*/
-
-        // POST users
+        // POST tasques
         [HttpPost]
         public void Post([FromBody] Tasca tasca)
         {
@@ -47,15 +39,24 @@ namespace ToDoListApiRest.Controllers
             objUserService.Add(tasca);
         }
 
-        // PUT users/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Tasca tasca)
+        // PUT tasques/5
+        [HttpPut/*("{id}")*/]
+        public void Put(/*int id, */[FromBody] Tasca tasca)
         {
             UserService objUserService = new UserService();
             objUserService.Update(tasca);
         }
+        /*
 
-        // DELETE users/5
+        //PUT tasques
+        [HttpPut]
+        public void PutEstat([FromBody] Tasca tasca)
+        {
+            UserService objUserService = new UserService();
+            objUserService.Update(tasca);
+        }//*/
+
+        // DELETE tasques/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
