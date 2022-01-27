@@ -8,7 +8,8 @@ namespace TodoList.Entity
 {
     public class Tasca
     {
-        public enum Estat{
+        public enum Estat
+        {
             Default,
             Todo,
             Doing,

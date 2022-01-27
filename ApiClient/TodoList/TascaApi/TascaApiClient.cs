@@ -173,6 +173,69 @@ namespace TodoList.TascaApi
             }
             return tasques;
         }
+        
+
+        /// <summary>
+        /// Afegeix una nova tasca
+        /// </summary>
+        /// <param name="tasca">Tasca que volem afegir</param>
+        /// <returns></returns>
+        public async Task AddAsync(Tasca tasca)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició POST al endpoint /users}
+                HttpResponseMessage response = await client.PostAsJsonAsync("tasques", tasca);
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+        /// <summary>
+        /// Modificar una tasca
+        /// </summary>
+        /// <param name="tasca">Tasca que volem modificar</param>
+        /// <returns></returns>
+        public async Task UpdateAsync(Tasca tasca)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició PUT al endpoint /users/Id
+                HttpResponseMessage response = await client.PutAsJsonAsync($"tasques/{tasca._Id}", tasca);
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+        /// <summary>
+        /// Modificar una tasca
+        /// </summary>
+        /// <param name="tasca">Tasca que volem modificar</param>
+        /// <returns></returns>
+        public async Task DeleteAsync(Tasca tasca)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Enviem una petició DELETE al endpoint /users/Id
+                HttpResponseMessage response = await client.DeleteAsync($"tasques/{tasca._Id}");
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public async Task<List<Tasca>> GetTasquesToDo()
         {
             List<Tasca> tasques = new List<Tasca>();
@@ -235,7 +298,7 @@ namespace TodoList.TascaApi
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició GET al endpoint /tasca}
-                HttpResponseMessage response = await client.GetAsync("tasques/3");
+                HttpResponseMessage response = await client.GetAsync("tasques/3 ");
                 if (response.IsSuccessStatusCode)
                 {
                     //Obtenim el resultat i el carreguem al objecte llista de tasques
@@ -248,63 +311,6 @@ namespace TodoList.TascaApi
                 }
             }
             return tasques;
-        }
-
-        /// <summary>
-        /// Afegeix una nova tasca
-        /// </summary>
-        /// <param name="tasca">Tasca que volem afegir</param>
-        /// <returns></returns>
-        public async Task AddAsync(Tasca tasca)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(BaseUri);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Enviem una petició POST al endpoint /users}
-                HttpResponseMessage response = await client.PostAsJsonAsync("tasques", tasca);
-                response.EnsureSuccessStatusCode();
-            }
-        }
-
-        /// <summary>
-        /// Modificar una tasca
-        /// </summary>
-        /// <param name="tasca">Tasca que volem modificar</param>
-        /// <returns></returns>
-        public async Task UpdateAsync(Tasca tasca)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(BaseUri);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Enviem una petició PUT al endpoint /users/Id
-                HttpResponseMessage response = await client.PutAsJsonAsync($"tasques/{tasca._Id}", tasca);
-                response.EnsureSuccessStatusCode();
-            }
-        }
-
-        /// <summary>
-        /// Modificar una tasca
-        /// </summary>
-        /// <param name="tasca">Tasca que volem modificar</param>
-        /// <returns></returns>
-        public async Task DeleteAsync(Tasca tasca)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(BaseUri);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Enviem una petició DELETE al endpoint /users/Id
-                HttpResponseMessage response = await client.DeleteAsync($"tasques/{tasca._Id}");
-                response.EnsureSuccessStatusCode();
-            }
         }
     }
 }
