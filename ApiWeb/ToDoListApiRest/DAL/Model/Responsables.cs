@@ -10,8 +10,9 @@ namespace ToDoListApiRest.DAL.Model
     {
 
        
-         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement("id")]
         public int _Id { get; set; }

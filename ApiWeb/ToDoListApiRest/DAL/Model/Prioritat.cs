@@ -9,9 +9,9 @@ namespace ToDoListApiRest.DAL.Model
     public class Prioritat
     {
 
-
         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement("id")]
         public int _Id { get; set; }
