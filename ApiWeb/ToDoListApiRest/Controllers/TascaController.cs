@@ -40,12 +40,13 @@ namespace ToDoListApiRest.Controllers
         }
 
         // PUT tasques/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Tasca tasca)
+        [HttpPut/*("{id}")*/]
+        public void Put(/*int id, */[FromBody] Tasca tasca)
         {
             UserService objUserService = new UserService();
             objUserService.Update(tasca);
         }
+        /*
 
         //PUT tasques
         [HttpPut]
@@ -53,7 +54,7 @@ namespace ToDoListApiRest.Controllers
         {
             UserService objUserService = new UserService();
             objUserService.Update(tasca);
-        }
+        }//*/
 
         // DELETE tasques/5
         [HttpDelete("{id}")]
