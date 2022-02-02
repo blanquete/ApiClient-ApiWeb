@@ -46,7 +46,7 @@ namespace TodoList.Views
                 Prioritat_id = cmb_prioritat.SelectedIndex,
                 Responsable_id = cmb_responsable.SelectedIndex,
                 Responsable_name = cmb_responsable.SelectedItem.ToString(), //Agafa el valor de l'index
-                Estat_name = "To Do", //Fixem el valor de l'index, una tasca sempre inicia al ToDo
+                Estat_name = "To do", //Fixem el valor de l'index, una tasca sempre inicia al ToDo
                 estat = Estat.Todo, //Fixem el valor de l'index, una tasca sempre inicia al ToDo
             };
 
