@@ -220,7 +220,7 @@ namespace TodoList
             {
                 case "lvTascaToDo":
                     task.estat = Tasca.Estat.Todo;
-                    task.Estat_name = "To Do";
+                    task.Estat_name = "To do";
                     await api.UpdateAsync(task);
                     break;
                 case "lvTascaDoing":
