@@ -32,6 +32,7 @@ namespace TodoList.Views
             {
                 responsable.Nom = txtBoxNomResponsable.Text;
                 //UserService.afegirResponsable(responsable);
+                responsable._Id = await api.maxIdResponsable();
                 await api.AfegirResponsable(responsable);
                 MessageBox.Show("Has introduït un usuari", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();

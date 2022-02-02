@@ -10,7 +10,7 @@ namespace TodoList.Entity
     {
 
         [BsonId]
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("id")]
         public int _Id { get; set; }

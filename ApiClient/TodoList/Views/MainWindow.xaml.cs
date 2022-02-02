@@ -51,6 +51,8 @@ namespace TodoList
             at = new AddTask(this);
             at.btn_modificar.Visibility = Visibility.Hidden;
             at.ShowDialog();
+            updateListViews();
+
         }
 
         private void lvTascaToDo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -125,47 +127,29 @@ namespace TodoList
         //Funcio per seleccionar un item i poder modificar les dades la tasca. 
         private void MenuItem_Modificar(object sender, RoutedEventArgs e)
         {
+            mt = new AddTask(this);
             if (temp == null)
             {
                 MessageBox.Show("Has de seleccionar una tasca, per poder modificar-la. ", "Informacio", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                obrirModificar();
+                
                 mt.btn_agregar.Visibility = Visibility.Hidden;
                 emplenarCampsFinestra();
                 mt.Focus();
+                mt.ShowDialog();
             }
         }
 
-        public  void obrirModificar()
-        {
-            at = new AddTask(this);
-            if (at.IsEnabled)
-            {
-                at.Close();
-                mt = new AddTask(this);
-                mt.Show();
-            }
-            else if (mt.IsEnabled)
-            {
-                mt.Close();
-                mt = new AddTask(this);
-                mt.Show();
-            }
-            else
-            {
-                mt = new AddTask(this);
-                mt.Show();
-            }
-        }
 
         //Funcio per seleccionar un item i poder modificar les dades la tasca. 
         public void emplenarCampsFinestra()
         {
-            if (mt.IsActive && temp != null)
+            if (temp != null)
             {
-                mt.txt_id.Text = temp.Id.ToString();
+                mt.txt_ObjectId.Text = temp.Id.ToString();
+                mt.txt_id.Text = temp._Id.ToString();
                 mt.txt_estat.Text = ((int)temp.estat).ToString();
                 mt.datepicker_data_inici.SelectedDate = temp.DInici;
                 mt.txt_nomTasca.Text = temp.Nom;

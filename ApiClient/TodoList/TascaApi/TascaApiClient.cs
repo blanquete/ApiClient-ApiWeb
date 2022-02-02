@@ -54,7 +54,7 @@ namespace TodoList.TascaApi
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //Enviem una petició GET al endpoint /tasca}
+                //Enviem una petició GET al endpoint /responsable}
                 HttpResponseMessage response = await client.GetAsync("responsables");
                 if (response.IsSuccessStatusCode)
                 {
@@ -64,7 +64,7 @@ namespace TodoList.TascaApi
                 }
                 else
                 {
-                    //TODO: que fer si ha anat malament? retornar null? missatge?
+
                 }
             }
             return responsables;
@@ -78,6 +78,21 @@ namespace TodoList.TascaApi
             {
                 var max_id = tasques[tasques.Count - 1]._Id;
 
+                return max_id;
+            }
+            catch
+            {
+                return 1;
+            }
+        }
+
+        public async Task<int> maxIdResponsable()
+        {
+            List<Responsable> responsables = await GetResponsable();
+
+            try
+            {
+                var max_id = responsables[responsables.Count - 1]._Id+1;
                 return max_id;
             }
             catch
@@ -208,7 +223,7 @@ namespace TodoList.TascaApi
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Enviem una petició PUT al endpoint /users/Id
-                HttpResponseMessage response = await client.PutAsJsonAsync($"tasques/{tasca._Id}", tasca);
+                HttpResponseMessage response = await client.PutAsJsonAsync("tasques", tasca);
                 response.EnsureSuccessStatusCode();
             }
         }

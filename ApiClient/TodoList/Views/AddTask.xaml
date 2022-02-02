@@ -32,6 +32,7 @@
             <ComboBox TabIndex="6" Name="cmb_prioritat" Height="28" ></ComboBox>
             <ComboBox TabIndex="7" Name="cmb_responsable" Height="28"></ComboBox>
 
+            <TextBox x:Name="txt_ObjectId" Visibility="Collapsed"/>
             <TextBox x:Name="txt_id" Visibility="Collapsed"/>
             <TextBox x:Name="txt_estat" Visibility="Collapsed"/>
             <DatePicker Name="datepicker_data_inici" Visibility="Collapsed" SelectedDateFormat="Short"/>
