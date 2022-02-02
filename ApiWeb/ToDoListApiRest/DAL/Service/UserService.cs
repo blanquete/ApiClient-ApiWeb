@@ -62,7 +62,7 @@ namespace ToDoListApiRest.DAL.Service
         {
             IMongoCollection<Tasca> tasques = DbContext.GetTasques();
 
-            var filtre = Builders<Tasca>.Filter.Eq(s => s._Id, tasca._Id);
+            var filtre = Builders<Tasca>.Filter.Eq(s => s.Id, tasca.Id);
             var result = tasques.ReplaceOne(filtre, tasca);
         }
 
@@ -104,9 +104,9 @@ namespace ToDoListApiRest.DAL.Service
         }
 
         /// <summary>
-        /// Afegeix un nou usuari a la base de dades
+        /// Afegeix un nou responsable a la base de dades
         /// </summary>
-        /// <param name="tasca">Entitat usuari</param>
+        /// <param name="responsable">Entitat responsable</param>
         public void afegirResponsable(Responsable responsable)
         {
             IMongoCollection<Responsable> responsables = DbContext.GetResponsables();
