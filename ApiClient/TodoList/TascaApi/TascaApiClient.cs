@@ -125,9 +125,9 @@ namespace TodoList.TascaApi
         /// <param name="Tasca">Codi de Tasca</param>
         /// <returns>Tasca o null si no el troba</returns>
         //Funció per poder fer un select de totes les nostres tasques.
-        public async Task<Tasca> GetTascaAsync(int estat)
+        public async Task<List<Tasca>> GetTasquesAsync(int estat)
         {
-            Tasca tasca = new Tasca();
+            List<Tasca> tasques = new List<Tasca>();
 
             using (var client = new HttpClient())
             {
@@ -142,12 +142,12 @@ namespace TodoList.TascaApi
                     //Reposta 204 quan no ha trobat dades
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        tasca = null;
+                        tasques = null;
                     }
                     else
                     {
                         //Obtenim el resultat i el carreguem al Objecte Tasca
-                        tasca = await response.Content.ReadAsAsync<Tasca>();
+                        tasques = await response.Content.ReadAsAsync<List<Tasca>>();
                         response.Dispose();
                     }
                 }
@@ -156,7 +156,7 @@ namespace TodoList.TascaApi
                     //TODO: que fer si ha anat malament? retornar null? 
                 }
             }
-            return tasca;
+            return tasques;
         }
 
         /// <summary>

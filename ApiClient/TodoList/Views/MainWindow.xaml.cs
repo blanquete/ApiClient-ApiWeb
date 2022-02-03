@@ -41,9 +41,9 @@ namespace TodoList
             lvTascaDone.ItemsSource = null;
 
 
-            lvTascaToDo.ItemsSource = todo = await api.GetTasquesToDo();
-            lvTascaDoing.ItemsSource = doing = await api.GetTasquesDoing();
-            lvTascaDone.ItemsSource = done = await api.GetTasquesDone();
+            lvTascaToDo.ItemsSource = todo = await api.GetTasquesAsync(1);//await api.GetTasquesToDo();
+            lvTascaDoing.ItemsSource = doing = await api.GetTasquesAsync(2);//await api.GetTasquesDoing();
+            lvTascaDone.ItemsSource = done = await api.GetTasquesAsync(3);//await api.GetTasquesDone();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
